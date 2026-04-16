@@ -1,0 +1,65 @@
+Here’s the clean, ready-to-use combined document with all the finalized copy for
+www.yuevivian.com.
+You can copy and paste this directly into Hostinger (or any builder). I’ve formatted it clearly with
+section headings so it’s easy to follow.
+Website Copy – YUE VIVIAN INTERNATIONAL LIMITED
+Hong Kong Registered Company
+Prepared for www.yuevivian.com
+1. Homepage – Hero Section
+Headline:
+YUE VIVIAN INTERNATIONAL LIMITED
+Sub-headline:
+A Hong Kong registered company providing perspectives on international markets.
+Button Text:
+Get in Touch
+Short Intro Text (optional – place below the hero section):
+Backed by over three decades of combined international business experience, we engage
+selectively with qualified institutional counterparts through direct and confidential channels.
+2. About Us Page
+Page Title:
+About Us
+Main Content:
+YUE VIVIAN INTERNATIONAL LIMITED is a Hong Kong registered company focused on
+international business matters.
+Backed by over three decades of combined international business experience, we maintain a
+selective and discreet approach to engagement. We operate from Hong Kong and value
+long-term relationships built on trust, confidentiality, and professionalism.
+Our focus is on providing high-level perspectives to qualified institutional parties who seek
+thoughtful dialogue on broader market developments.
+3. Market Perspectives Page
+Page Title:
+Market Perspectives
+Main Content:
+We occasionally share general observations on global economic trends and market
+developments.
+This section is intended for informational purposes only and does not constitute financial,
+investment, or professional advice of any kind. All content reflects publicly available information
+and general commentary.
+4. Contact Page
+Page Title:
+Contact
+Main Content:
+For qualified parties interested in an initial discussion, please reach out through the form below
+or via secure email.
+All inquiries are handled with the strictest confidentiality.
+Suggested Form Fields:
+• Full Name
+• Company / Institution
+• Email Address
+• Message
+Thank You Message (after form submission): Thank you. Your message has been received. We
+will respond to qualified inquiries promptly and privately.
+Physical Address: YUE VIVIAN INTERNATIONAL LIMITED
+Unit 907, Sunwise Industrial Building
+16-26 Wang Wo Tsai Street, Tsuen Wan
+New Territories, Hong Kong
+5. Footer (appears on every page)
+YUE VIVIAN INTERNATIONAL LIMITED
+Hong Kong Registered Company
+This website is provided for general informational purposes only. It does not constitute any form
+of offer, solicitation, or professional advice. All communications are private and confidential.
+How to Use This Document on Hostinger
+1. Paste the big AI prompt I gave you earlier to generate the initial site structure.
+2. Once the draft is ready, replace the text on each page with the sections above.
+3. Upload the standalone logo (the one with the shield and name below it) as your main logo.
+4. Use the dark black + metallic gold color scheme we discussed.
