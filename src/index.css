@@ -2,50 +2,56 @@
 
 @theme {
   --color-gold-light: #f5d78e;
-  --color-gold: #d4af6a;
-  --color-gold-dark: #a07840;
-  --color-ink: #0a0a0a;
-  --color-ink-soft: #141414;
-  --color-parchment: #c8b89a;
+  --color-gold:       #d4af6a;
+  --color-gold-dark:  #a07840;
+  --color-ink:        #080605;
+  --color-ink-mid:    #100d0a;
+  --color-parchment:  #c8b89a;
 
-  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-sans:   system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
+/* ── Keyframes ── */
+
+/* Shield 3D spin around vertical axis */
+@keyframes shield-spin {
+  from { transform: rotateY(0deg);   }
+  to   { transform: rotateY(360deg); }
 }
 
-@keyframes glow-pulse {
-  0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 175, 106, 0.35)); }
-  50% { filter: drop-shadow(0 0 28px rgba(212, 175, 106, 0.85)); }
-}
+/* ── Utility classes ── */
 
-@keyframes drift-left {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(-10px); }
-}
-
-@keyframes drift-right {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(10px); }
-}
-
+/* Shield 3D spin + directional shadow (key light from top-right) */
 .shield-animate {
-  animation: float 4s ease-in-out infinite, glow-pulse 3s ease-in-out infinite;
+  animation: shield-spin 6s linear infinite;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  filter:
+    drop-shadow(-10px 14px 18px rgba(0,0,0,0.80))
+    drop-shadow(-4px 6px 10px rgba(0,0,0,0.55))
+    drop-shadow(0 0 24px rgba(255,200,110,0.18));
+  position: relative;
+  z-index: 10;
 }
 
-.clouds-left-animate {
-  animation: drift-left 5s ease-in-out infinite;
-}
-
-.clouds-right-animate {
-  animation: drift-right 5s ease-in-out infinite;
+/* Cloud tint: dark strokes → warm gold line-art matching reference */
+.cloud-gold {
+  filter:
+    brightness(0)
+    invert(1)
+    sepia(1)
+    saturate(5)
+    hue-rotate(-6deg)
+    brightness(0.78)
+    drop-shadow(0 2px 3px rgba(0,0,0,0.55))
+    drop-shadow(0 0 10px rgba(185,138,50,0.28));
 }
 
 body {
   margin: 0;
-  background-color: #0a0a0a;
+  background-color: #080605;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
