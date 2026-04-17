@@ -36,6 +36,19 @@
   z-index: 10;
 }
 
+/* CTA — gold-on-transparent, inverts to ink-on-gold on hover */
+.cta-gold {
+  color: #d4af6a;
+  background: transparent;
+  border: 1px solid #d4af6a;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.cta-gold:hover,
+.cta-gold:focus {
+  background: #d4af6a;
+  color: #080605;
+}
+
 /* Cloud tint: dark strokes → warm gold line-art matching reference */
 .cloud-gold {
   filter:

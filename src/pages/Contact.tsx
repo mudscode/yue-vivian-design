@@ -81,7 +81,7 @@ export function Contact(): React.JSX.Element {
 
               <button
                 type="submit"
-                className="border border-gold text-gold text-xs tracking-[0.25em] uppercase px-10 py-3 transition-colors duration-250 hover:bg-gold hover:text-ink cursor-pointer bg-transparent"
+                className="cta-gold text-xs tracking-[0.25em] uppercase px-10 py-3 cursor-pointer"
               >
                 Send Message
               </button>

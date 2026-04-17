@@ -132,13 +132,10 @@ export function Home(): React.JSX.Element {
         />
 
         {/* ──── Shield + clouds (square composition) ──── */}
-        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-20 lg:pt-6 pb-0">
+        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-20 lg:pt-0 pb-0">
           <div
-            className="relative"
-            style={{
-              width: 'clamp(420px, 74vw, 780px)',
-              aspectRatio: '1 / 1',
-            }}
+            className="relative aspect-square lg:aspect-[1/0.74]"
+            style={{ width: 'clamp(420px, 74vw, 780px)' }}
           >
 
             {/* Upper-left cloud — tucks behind shield's top-left edge */}
@@ -219,7 +216,7 @@ export function Home(): React.JSX.Element {
 
         {/* ──── Text section ──── */}
         <div
-          className="relative z-10 pb-14 pt-10 lg:pt-2 lg:pb-6 px-6 text-center"
+          className="relative z-10 pb-14 pt-10 lg:pt-0 lg:pb-6 px-6 text-center"
           style={{
             background: `linear-gradient(to bottom,
               transparent 0%,
@@ -240,7 +237,7 @@ export function Home(): React.JSX.Element {
           <h1
             className="font-cinzel font-black uppercase mx-auto"
             style={{
-              fontSize: 'clamp(30px, 6vw, 72px)',
+              fontSize: 'clamp(26px, 4.6vw, 56px)',
               letterSpacing: '0.10em',
               lineHeight: 1.1,
               marginBottom: '18px',
@@ -270,10 +267,8 @@ export function Home(): React.JSX.Element {
           {/* CTA */}
           <Link
             to="/contact"
-            className="inline-block font-cinzel uppercase transition-colors duration-300 hover:bg-gold hover:text-ink"
+            className="cta-gold inline-block font-cinzel uppercase"
             style={{
-              border: '1px solid #d4af6a',
-              color: '#d4af6a',
               fontSize: 'clamp(11px, 1vw, 13px)',
               letterSpacing: '0.22em',
               padding: '13px 44px',
