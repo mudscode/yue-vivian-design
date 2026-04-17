@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local reference assets (not for deployment)
+docs/reference-video.mp4
+public/assets/yue-vivian-reference-image.JPG
