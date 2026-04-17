@@ -22,7 +22,7 @@ export function Home(): React.JSX.Element {
     <>
       {/* ─────────────── HERO ─────────────── */}
       <section
-        className="relative min-h-svh flex flex-col lg:justify-center overflow-hidden"
+        className="relative overflow-hidden pt-10 md:pt-12 lg:pt-16"
         style={{ background: '#080605', isolation: 'isolate' }}
       >
 
@@ -132,9 +132,9 @@ export function Home(): React.JSX.Element {
         />
 
         {/* ──── Shield + clouds (square composition) ──── */}
-        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-20 lg:pt-0 pb-0">
+        <div className="relative flex justify-center px-4 -mb-28 md:-mb-32 lg:-mb-36">
           <div
-            className="relative aspect-square lg:aspect-[1/0.74]"
+            className="relative aspect-[1/0.84] lg:aspect-[1/0.6]"
             style={{ width: 'clamp(420px, 74vw, 780px)' }}
           >
 
@@ -146,7 +146,7 @@ export function Home(): React.JSX.Element {
               className="cloud-gold absolute select-none"
               style={{
                 width: '30%',
-                top: '20%',
+                top: '4%',
                 left: '6%',
                 zIndex: 5,
               }}
@@ -160,7 +160,7 @@ export function Home(): React.JSX.Element {
               className="cloud-gold absolute select-none"
               style={{
                 width: '30%',
-                top: '20%',
+                top: '4%',
                 right: '6%',
                 zIndex: 5,
               }}
@@ -174,7 +174,7 @@ export function Home(): React.JSX.Element {
               className="cloud-gold absolute select-none"
               style={{
                 width: '30%',
-                bottom: '20%',
+                bottom: '6%',
                 left: '6%',
                 zIndex: 5,
               }}
@@ -188,7 +188,7 @@ export function Home(): React.JSX.Element {
               className="cloud-gold absolute select-none"
               style={{
                 width: '30%',
-                bottom: '20%',
+                bottom: '6%',
                 right: '6%',
                 zIndex: 5,
               }}
@@ -196,7 +196,7 @@ export function Home(): React.JSX.Element {
 
             {/* Shield wrapper — centred in the square */}
             <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2"
               style={{
                 width: '76%',
                 aspectRatio: '707 / 628',
@@ -216,7 +216,7 @@ export function Home(): React.JSX.Element {
 
         {/* ──── Text section ──── */}
         <div
-          className="relative z-10 pb-14 pt-10 lg:pt-0 lg:pb-6 px-6 text-center"
+          className="relative z-10 px-6 pt-0 pb-14 text-center lg:pb-6"
           style={{
             background: `linear-gradient(to bottom,
               transparent 0%,
