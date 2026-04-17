@@ -1,51 +1,162 @@
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-const links = [
+interface NavLink {
+  label: string
+  to: string
+}
+
+const links: readonly NavLink[] = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
   { label: 'Market Perspectives', to: '/market-perspectives' },
   { label: 'Contact', to: '/contact' },
 ]
 
+const linkInactive = 'rgba(212,175,106,0.78)'
+const linkActive = '#f5d78e'
+const goldMuted = 'rgba(212,175,106,0.9)'
+const separator = 'rgba(212,175,106,0.35)'
+const drawerBorder = 'rgba(212,175,106,0.18)'
+
 export function Nav(): React.JSX.Element {
   const { pathname } = useLocation()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const isHome = pathname === '/'
 
-  return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 transition-colors duration-300 ${
-        isHome ? 'bg-transparent' : 'bg-ink border-b border-gold/20'
-      }`}
-    >
-      {/* Logo: 福 character */}
-      <Link
-        to="/"
-        className="text-gold no-underline leading-none select-none"
-        style={{ fontFamily: "'ZCOOL XiaoWei', serif", fontSize: '48px', lineHeight: 1 }}
-      >
-        福
-      </Link>
+  function closeDrawer(): void {
+    setIsOpen(false)
+  }
 
-      {/* Nav links with | separators */}
-      <ul className="flex items-center list-none m-0 p-0">
-        {links.map(({ label, to }, i) => (
-          <li key={to} className="flex items-center">
-            {i > 0 && (
-              <span className="text-white/30 mx-4 text-sm select-none">|</span>
-            )}
-            <Link
-              to={to}
-              className={`text-sm tracking-wide transition-colors duration-200 no-underline ${
-                pathname === to
-                  ? 'text-white'
-                  : 'text-white/80 hover:text-white'
-              }`}
-            >
-              {label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+  return (
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 py-4 transition-colors duration-300 ${
+          isHome ? 'bg-transparent' : 'bg-ink border-b border-gold/20'
+        }`}
+      >
+        {/* Logo */}
+        <Link
+          to="/"
+          onClick={closeDrawer}
+          className="no-underline leading-none select-none"
+          style={{
+            fontFamily: "'ZCOOL XiaoWei', serif",
+            fontSize: '38px',
+            lineHeight: 1,
+            color: goldMuted,
+          }}
+        >
+          福
+        </Link>
+
+        {/* Desktop links */}
+        <ul className="hidden md:flex items-center list-none m-0 p-0">
+          {links.map(({ label, to }, i) => (
+            <li key={to} className="flex items-center">
+              {i > 0 && (
+                <span
+                  className="mx-5 select-none"
+                  style={{ color: separator, fontSize: '15px' }}
+                >
+                  |
+                </span>
+              )}
+              <Link
+                to={to}
+                className="tracking-wide transition-colors duration-200 no-underline"
+                style={{
+                  fontSize: '15px',
+                  letterSpacing: '0.03em',
+                  color: pathname === to ? linkActive : linkInactive,
+                }}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          onClick={(): void => setIsOpen(true)}
+          aria-label="Open menu"
+          aria-expanded={isOpen}
+          className="md:hidden flex flex-col items-end gap-[5px] p-2 cursor-pointer bg-transparent border-0"
+        >
+          <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
+          <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
+          <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
+        </button>
+      </nav>
+
+      {/* Mobile overlay */}
+      <div
+        onClick={closeDrawer}
+        className={`md:hidden fixed inset-0 z-40 bg-black transition-opacity duration-300 ${
+          isOpen ? 'opacity-60 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden="true"
+      />
+
+      {/* Mobile drawer */}
+      <aside
+        className={`md:hidden fixed top-0 left-0 bottom-0 z-50 w-72 max-w-[80vw] transform transition-transform duration-300 ease-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+        style={{
+          background: '#0d0a07',
+          borderRight: `1px solid ${drawerBorder}`,
+        }}
+        aria-hidden={!isOpen}
+      >
+        <div
+          className="flex items-center justify-between px-6 py-4 border-b"
+          style={{ borderColor: drawerBorder }}
+        >
+          <span
+            className="select-none leading-none"
+            style={{
+              fontFamily: "'ZCOOL XiaoWei', serif",
+              fontSize: '34px',
+              color: goldMuted,
+            }}
+          >
+            福
+          </span>
+          <button
+            type="button"
+            onClick={closeDrawer}
+            aria-label="Close menu"
+            className="p-2 cursor-pointer bg-transparent border-0"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={goldMuted} strokeWidth="2" strokeLinecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="6" y1="18" x2="18" y2="6" />
+            </svg>
+          </button>
+        </div>
+
+        <ul className="list-none m-0 p-0 mt-3">
+          {links.map(({ label, to }) => (
+            <li key={to}>
+              <Link
+                to={to}
+                onClick={closeDrawer}
+                className="block px-6 py-4 no-underline transition-colors duration-200"
+                style={{
+                  fontSize: '17px',
+                  letterSpacing: '0.04em',
+                  color: pathname === to ? linkActive : linkInactive,
+                }}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </>
   )
 }

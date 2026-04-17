@@ -87,6 +87,38 @@ export function Home(): React.JSX.Element {
           }}
         />
 
+        {/* Layer 3b — sharp diagonal light beams from upper-right */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `
+              linear-gradient(132deg,
+                transparent 0%,
+                transparent 40%,
+                rgba(255,235,175,0.12) 46%,
+                rgba(255,245,200,0.26) 49%,
+                rgba(255,235,175,0.12) 52%,
+                transparent 58%,
+                transparent 100%),
+              linear-gradient(126deg,
+                transparent 0%,
+                transparent 32%,
+                rgba(255,228,165,0.08) 38%,
+                rgba(255,238,185,0.16) 41%,
+                rgba(255,228,165,0.08) 44%,
+                transparent 50%,
+                transparent 100%),
+              linear-gradient(138deg,
+                transparent 0%,
+                transparent 56%,
+                rgba(255,222,158,0.06) 60%,
+                rgba(255,232,178,0.12) 62%,
+                rgba(255,222,158,0.06) 64%,
+                transparent 68%,
+                transparent 100%)`
+          }}
+        />
+
         {/* Layer 4 — corner vignette deepens the lower-left, anchors composition */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -255,21 +287,48 @@ export function Home(): React.JSX.Element {
 
       {/* ─────────────── INTRO BAND ─────────────── */}
       <section
-        className="py-14 px-8 text-center"
+        className="py-20 md:py-24 px-8 text-center"
         style={{ background: '#0d0a07', borderTop: '1px solid rgba(212,175,106,0.10)' }}
       >
-        <p
-          className="font-sans mx-auto"
-          style={{
-            fontSize: 'clamp(13px, 1.3vw, 15px)',
-            color: 'rgba(200,184,154,0.60)',
-            lineHeight: 1.8,
-            maxWidth: '560px',
-          }}
-        >
-          Backed by over three decades of combined international business experience, we engage
-          selectively with qualified institutional counterparts through direct and confidential channels.
-        </p>
+        <div className="max-w-2xl mx-auto">
+          {/* Eyebrow */}
+          <p
+            className="font-cinzel uppercase mb-6"
+            style={{
+              fontSize: '14px',
+              letterSpacing: '0.45em',
+              color: 'rgba(212,175,106,0.85)',
+            }}
+          >
+            Our Approach
+          </p>
+
+          {/* Accent rule */}
+          <div
+            className="mx-auto mb-8"
+            style={{
+              width: '48px',
+              height: '1px',
+              background: 'linear-gradient(to right, transparent, rgba(212,175,106,0.55), transparent)',
+            }}
+          />
+
+          {/* Body */}
+          <p
+            className="font-sans mx-auto"
+            style={{
+              fontSize: 'clamp(16px, 1.55vw, 19px)',
+              color: 'rgba(220,205,175,0.82)',
+              lineHeight: 1.75,
+              letterSpacing: '0.01em',
+              maxWidth: '640px',
+            }}
+          >
+            Backed by over three decades of combined international business experience,
+            we engage selectively with qualified institutional counterparts through
+            direct and confidential channels.
+          </p>
+        </div>
       </section>
     </>
   )
