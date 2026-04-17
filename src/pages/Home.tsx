@@ -22,7 +22,7 @@ export function Home(): React.JSX.Element {
     <>
       {/* ─────────────── HERO ─────────────── */}
       <section
-        className="relative min-h-svh flex flex-col overflow-hidden"
+        className="relative min-h-svh flex flex-col lg:justify-center overflow-hidden"
         style={{ background: '#080605', isolation: 'isolate' }}
       >
 
@@ -132,7 +132,7 @@ export function Home(): React.JSX.Element {
         />
 
         {/* ──── Shield + clouds (square composition) ──── */}
-        <div className="relative flex-1 flex items-center justify-center pt-20 pb-0">
+        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-20 lg:pt-6 pb-0">
           <div
             className="relative"
             style={{
@@ -219,7 +219,7 @@ export function Home(): React.JSX.Element {
 
         {/* ──── Text section ──── */}
         <div
-          className="relative z-10 pb-14 pt-10 px-6 text-center"
+          className="relative z-10 pb-14 pt-10 lg:pt-2 lg:pb-6 px-6 text-center"
           style={{
             background: `linear-gradient(to bottom,
               transparent 0%,
