@@ -26,4 +26,11 @@ dist-ssr
 # Local reference assets (not for deployment)
 docs/reference-video.mp4
 public/assets/yue-vivian-reference-image.JPG
+public/assets/hero-intro-uncropped.mp4
 image.png
+
+# Screenshots and design references dropped at repo root
+/Screenshot*.png
+/Screenshot*.jpg
+/Screenshot*.jpeg
+/new-borders.*

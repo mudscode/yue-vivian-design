@@ -1,222 +1,70 @@
 import { Link } from 'react-router-dom'
 
-/*
-  Shield PNG geometry (784 × 1168 px, RGBA):
-    – Transparent top  : y = 0   → 280  (24% of height)
-    – Gold shield      : y = 280 → 760  (41% of height, 480 px natural)
-    – Transparent bot  : y = 760 → 1168 (35% of height)
-
-  Container shows only the gold shield:
-    aspectRatio = '784 / 480'  →  height = width × (480/784)
-
-  To shift the PNG up so its gold-top aligns with container-top:
-    marginTop = -(transparent_top / PNG_width) × 100%
-             = -(280/784) × 100%  ≈  -35.7%  →  use '-36%'
-
-  Result: gold shield fills the container top-to-bottom exactly.
-  Glow rings centred at top:50% of container = centre of gold shield. ✓
-*/
-
 export function Home(): React.JSX.Element {
   return (
     <>
       {/* ─────────────── HERO ─────────────── */}
       <section
-        className="relative overflow-hidden pt-10 md:pt-12 lg:pt-16"
+        className="relative min-h-svh flex flex-col lg:justify-center overflow-hidden"
         style={{ background: '#080605', isolation: 'isolate' }}
       >
 
-        {/* Layer 1 — warm ambient core */}
+        {/* Subtle warm highlight from upper-right — kept soft so the dark base dominates */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: `
-              radial-gradient(ellipse 150% 115% at 55% 45%,
-                rgba(58,38,18,0.70) 0%,
-                rgba(28,18,10,0.30) 42%,
-                transparent 78%)`
+              radial-gradient(ellipse 70% 55% at 92% -8%,
+                rgba(200,150,60,0.18) 0%,
+                rgba(150,110,45,0.08) 30%,
+                transparent 60%)`
           }}
         />
 
-        {/* Layer 2 — diagonal silk folds (broad, soft highlights) */}
+        {/* Corner vignette for depth */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: `
-              linear-gradient(118deg,
-                transparent 0%,
-                rgba(210,160,72,0) 22%,
-                rgba(225,175,85,0.16) 42%,
-                rgba(250,200,110,0.28) 50%,
-                rgba(225,175,85,0.16) 58%,
-                rgba(210,160,72,0) 78%,
-                transparent 100%),
-              linear-gradient(142deg,
-                transparent 8%,
-                rgba(170,125,48,0) 35%,
-                rgba(195,145,62,0.13) 52%,
-                rgba(170,125,48,0) 68%,
-                transparent 96%),
-              linear-gradient(104deg,
-                transparent 32%,
-                rgba(150,105,38,0) 50%,
-                rgba(180,130,52,0.09) 58%,
-                rgba(150,105,38,0) 66%,
-                transparent 84%)`
+              radial-gradient(ellipse 110% 100% at 35% 70%,
+                transparent 35%,
+                rgba(0,0,0,0.45) 75%,
+                rgba(0,0,0,0.75) 100%)`
           }}
         />
 
-        {/* Layer 3 — top-right window light: warm throw + bright specular */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `
-              radial-gradient(ellipse 85% 70% at 96% -12%,
-                rgba(245,190,90,0.55) 0%,
-                rgba(210,155,65,0.28) 22%,
-                rgba(165,120,45,0.12) 45%,
-                transparent 70%),
-              radial-gradient(circle 180px at 92% 3%,
-                rgba(255,235,175,0.58) 0%,
-                rgba(255,225,150,0.22) 35%,
-                rgba(255,210,130,0.06) 60%,
-                transparent 80%),
-              radial-gradient(ellipse 45% 90% at 102% 40%,
-                rgba(215,160,70,0.12) 0%,
-                transparent 55%)`
-          }}
-        />
-
-        {/* Layer 3b — sharp diagonal light beams from upper-right */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `
-              linear-gradient(132deg,
-                transparent 0%,
-                transparent 40%,
-                rgba(255,235,175,0.12) 46%,
-                rgba(255,245,200,0.26) 49%,
-                rgba(255,235,175,0.12) 52%,
-                transparent 58%,
-                transparent 100%),
-              linear-gradient(126deg,
-                transparent 0%,
-                transparent 32%,
-                rgba(255,228,165,0.08) 38%,
-                rgba(255,238,185,0.16) 41%,
-                rgba(255,228,165,0.08) 44%,
-                transparent 50%,
-                transparent 100%),
-              linear-gradient(138deg,
-                transparent 0%,
-                transparent 56%,
-                rgba(255,222,158,0.06) 60%,
-                rgba(255,232,178,0.12) 62%,
-                rgba(255,222,158,0.06) 64%,
-                transparent 68%,
-                transparent 100%)`
-          }}
-        />
-
-        {/* Layer 4 — corner vignette deepens the lower-left, anchors composition */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `
-              radial-gradient(ellipse 110% 100% at 35% 65%,
-                transparent 32%,
-                rgba(0,0,0,0.35) 72%,
-                rgba(0,0,0,0.62) 100%)`
-          }}
-        />
-
-        {/* ──── Shield + clouds (square composition) ──── */}
-        <div className="relative flex justify-center px-4 -mb-28 md:-mb-32 lg:-mb-36">
+        {/* ──── Hero intro video — plays once, freezes on last frame ──── */}
+        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-20 lg:pt-[66px] pb-0">
+          {/* Mobile — edge-to-edge, taller aspect */}
+          <video
+            src="/assets/hero-intro-mobile.mp4"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            aria-label="Yue Vivian crest animation"
+            className="w-full h-auto block lg:hidden"
+          />
+          {/* Desktop — clamped width */}
           <div
-            className="relative aspect-[1/0.84] lg:aspect-[1/0.6]"
-            style={{ width: 'clamp(420px, 74vw, 780px)' }}
+            className="relative hidden lg:block"
+            style={{ width: 'clamp(360px, 62vw, 620px)' }}
           >
-
-            {/* Upper-left cloud — tucks behind shield's top-left edge */}
-            <img
-              src="/assets/cloud-upper-left.png"
-              alt=""
-              aria-hidden="true"
-              className="cloud-gold absolute select-none"
-              style={{
-                width: '30%',
-                top: '4%',
-                left: '6%',
-                zIndex: 5,
-              }}
+            <video
+              src="/assets/hero-intro.mp4"
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              aria-label="Yue Vivian crest animation"
+              className="w-full h-auto block"
             />
-
-            {/* Upper-right cloud — tucks behind shield's top-right edge */}
-            <img
-              src="/assets/cloud-upper-right.png"
-              alt=""
-              aria-hidden="true"
-              className="cloud-gold absolute select-none"
-              style={{
-                width: '30%',
-                top: '4%',
-                right: '6%',
-                zIndex: 5,
-              }}
-            />
-
-            {/* Lower-left cloud — tucks behind shield's bottom-left edge */}
-            <img
-              src="/assets/cloud-bottom-left.png"
-              alt=""
-              aria-hidden="true"
-              className="cloud-gold absolute select-none"
-              style={{
-                width: '30%',
-                bottom: '6%',
-                left: '6%',
-                zIndex: 5,
-              }}
-            />
-
-            {/* Lower-right cloud — tucks behind shield's bottom-right edge */}
-            <img
-              src="/assets/cloud-bottom-right.png"
-              alt=""
-              aria-hidden="true"
-              className="cloud-gold absolute select-none"
-              style={{
-                width: '30%',
-                bottom: '6%',
-                right: '6%',
-                zIndex: 5,
-              }}
-            />
-
-            {/* Shield wrapper — centred in the square */}
-            <div
-              className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2"
-              style={{
-                width: '76%',
-                aspectRatio: '707 / 628',
-                zIndex: 10,
-                perspective: '1400px',
-              }}
-            >
-              <img
-                src="/assets/shield-cropped.png"
-                alt="Yue Vivian crest"
-                className="shield-animate w-full block"
-              />
-            </div>
-
           </div>
         </div>
 
         {/* ──── Text section ──── */}
         <div
-          className="relative z-10 px-6 pt-0 pb-14 text-center lg:pb-6"
+          className="relative z-10 pb-14 pt-10 lg:pt-10 lg:pb-6 px-6 text-center"
           style={{
             background: `linear-gradient(to bottom,
               transparent 0%,
@@ -235,11 +83,11 @@ export function Home(): React.JSX.Element {
 
           {/* Company name */}
           <h1
-            className="font-cinzel font-black uppercase mx-auto"
+            className="font-cinzel font-semibold uppercase mx-auto"
             style={{
               fontSize: 'clamp(26px, 4.6vw, 56px)',
-              letterSpacing: '0.10em',
-              lineHeight: 1.1,
+              letterSpacing: '0.12em',
+              lineHeight: 1.15,
               marginBottom: '18px',
               maxWidth: '840px',
               color: '#d4af6a',
@@ -253,7 +101,7 @@ export function Home(): React.JSX.Element {
             className="font-sans mx-auto"
             style={{
               fontSize: 'clamp(13px, 1.4vw, 17px)',
-              color: 'rgba(200,184,154,0.72)',
+              color: 'rgba(255,255,255,0.85)',
               letterSpacing: '0.03em',
               lineHeight: 1.75,
               maxWidth: '420px',
@@ -282,10 +130,13 @@ export function Home(): React.JSX.Element {
 
       {/* ─────────────── INTRO BAND ─────────────── */}
       <section
-        className="py-20 md:py-24 px-8 text-center"
+        className="py-20 md:py-24 px-6 text-center"
         style={{ background: '#0d0a07', borderTop: '1px solid rgba(212,175,106,0.10)' }}
       >
-        <div className="max-w-2xl mx-auto">
+        <div
+          className="mx-auto"
+          style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 620px)' }}
+        >
           {/* Eyebrow */}
           <p
             className="font-cinzel uppercase mb-6"
@@ -313,7 +164,7 @@ export function Home(): React.JSX.Element {
             className="font-sans mx-auto"
             style={{
               fontSize: 'clamp(16px, 1.55vw, 19px)',
-              color: 'rgba(220,205,175,0.82)',
+              color: 'rgba(255,255,255,0.88)',
               lineHeight: 1.75,
               letterSpacing: '0.01em',
               maxWidth: '640px',

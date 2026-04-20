@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 interface NavLink {
@@ -16,13 +16,21 @@ const links: readonly NavLink[] = [
 const linkInactive = 'rgba(212,175,106,0.78)'
 const linkActive = '#f5d78e'
 const goldMuted = 'rgba(212,175,106,0.9)'
-const separator = 'rgba(212,175,106,0.35)'
 const drawerBorder = 'rgba(212,175,106,0.18)'
 
 export function Nav(): React.JSX.Element {
   const { pathname } = useLocation()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const isHome = pathname === '/'
+  const [scrolled, setScrolled] = useState<boolean>(false)
+
+  useEffect((): (() => void) => {
+    function handleScroll(): void {
+      setScrolled(window.scrollY > 4)
+    }
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return (): void => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   function closeDrawer(): void {
     setIsOpen(false)
@@ -31,64 +39,61 @@ export function Nav(): React.JSX.Element {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 py-4 transition-colors duration-300 ${
-          isHome ? 'bg-transparent' : 'bg-ink border-b border-gold/20'
+        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 bg-ink transition-[border-color] duration-200 ${
+          scrolled ? 'border-b border-gold/20' : 'border-b border-transparent'
         }`}
       >
-        {/* Logo */}
-        <Link
-          to="/"
-          onClick={closeDrawer}
-          className="no-underline leading-none select-none"
-          style={{
-            fontFamily: "'ZCOOL XiaoWei', serif",
-            fontSize: '38px',
-            lineHeight: 1,
-            color: goldMuted,
-          }}
+        <div
+          className="relative flex items-center justify-between mx-auto"
+          style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 620px)' }}
         >
-          福
-        </Link>
+          {/* Logo — far left on every breakpoint */}
+          <Link
+            to="/"
+            onClick={closeDrawer}
+            className="no-underline leading-none select-none"
+            style={{
+              fontFamily: "'ZCOOL XiaoWei', serif",
+              fontSize: '34px',
+              lineHeight: 1,
+              color: goldMuted,
+            }}
+          >
+            福
+          </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center list-none m-0 p-0">
-          {links.map(({ label, to }, i) => (
-            <li key={to} className="flex items-center">
-              {i > 0 && (
-                <span
-                  className="mx-5 select-none"
-                  style={{ color: separator, fontSize: '15px' }}
+          {/* Desktop links — spread so Contact lands at far right */}
+          <ul className="hidden md:flex items-center list-none m-0 p-0 gap-10">
+            {links.map(({ label, to }) => (
+              <li key={to} className="flex items-center">
+                <Link
+                  to={to}
+                  className="tracking-wide transition-colors duration-200 no-underline"
+                  style={{
+                    fontSize: '15px',
+                    letterSpacing: '0.03em',
+                    color: pathname === to ? linkActive : linkInactive,
+                  }}
                 >
-                  |
-                </span>
-              )}
-              <Link
-                to={to}
-                className="tracking-wide transition-colors duration-200 no-underline"
-                style={{
-                  fontSize: '15px',
-                  letterSpacing: '0.03em',
-                  color: pathname === to ? linkActive : linkInactive,
-                }}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        {/* Mobile hamburger */}
-        <button
-          type="button"
-          onClick={(): void => setIsOpen(true)}
-          aria-label="Open menu"
-          aria-expanded={isOpen}
-          className="md:hidden flex flex-col items-end gap-[5px] p-2 cursor-pointer bg-transparent border-0"
-        >
-          <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
-          <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
-          <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
-        </button>
+          {/* Mobile hamburger (far right) */}
+          <button
+            type="button"
+            onClick={(): void => setIsOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={isOpen}
+            className="md:hidden flex flex-col items-end gap-[5px] p-2 cursor-pointer bg-transparent border-0"
+          >
+            <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
+            <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
+            <span className="block h-[2px] w-6" style={{ background: goldMuted }} />
+          </button>
+        </div>
       </nav>
 
       {/* Mobile overlay */}

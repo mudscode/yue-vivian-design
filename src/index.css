@@ -12,28 +12,17 @@
   --font-sans:   system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* ── Keyframes ── */
-
-/* Shield 3D spin around vertical axis */
-@keyframes shield-spin {
-  from { transform: rotateY(0deg);   }
-  to   { transform: rotateY(360deg); }
-}
-
-/* ── Utility classes ── */
-
-/* Shield 3D spin + directional shadow (key light from top-right) */
-.shield-animate {
-  animation: shield-spin 6s linear infinite;
-  transform-origin: center center;
-  transform-style: preserve-3d;
-  backface-visibility: visible;
+/* Cloud tint: dark strokes → warm gold line-art matching reference */
+.cloud-gold {
   filter:
-    drop-shadow(-10px 14px 18px rgba(0,0,0,0.80))
-    drop-shadow(-4px 6px 10px rgba(0,0,0,0.55))
-    drop-shadow(0 0 24px rgba(255,200,110,0.18));
-  position: relative;
-  z-index: 10;
+    brightness(0)
+    invert(1)
+    sepia(1)
+    saturate(5)
+    hue-rotate(-6deg)
+    brightness(0.78)
+    drop-shadow(0 2px 3px rgba(0,0,0,0.55))
+    drop-shadow(0 0 10px rgba(185,138,50,0.22));
 }
 
 /* CTA — gold-on-transparent, inverts to ink-on-gold on hover */
@@ -47,19 +36,6 @@
 .cta-gold:focus {
   background: #d4af6a;
   color: #080605;
-}
-
-/* Cloud tint: dark strokes → warm gold line-art matching reference */
-.cloud-gold {
-  filter:
-    brightness(0)
-    invert(1)
-    sepia(1)
-    saturate(5)
-    hue-rotate(-6deg)
-    brightness(0.78)
-    drop-shadow(0 2px 3px rgba(0,0,0,0.55))
-    drop-shadow(0 0 10px rgba(185,138,50,0.28));
 }
 
 body {
