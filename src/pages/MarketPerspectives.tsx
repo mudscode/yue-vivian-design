@@ -7,7 +7,7 @@ export function MarketPerspectives(): React.JSX.Element {
         <h1
           className="font-cinzel uppercase"
           style={{
-            fontSize: 'clamp(36px, 6vw, 64px)',
+            fontSize: 'clamp(30px, 4.4vw, 48px)',
             letterSpacing: '0.08em',
             color: '#e8c87a',
             lineHeight: 1.15,

@@ -7,7 +7,7 @@ export function AboutUs(): React.JSX.Element {
         <h1
           className="font-cinzel uppercase"
           style={{
-            fontSize: 'clamp(40px, 6.5vw, 72px)',
+            fontSize: 'clamp(30px, 4.4vw, 48px)',
             letterSpacing: '0.08em',
             color: '#e8c87a',
             marginBottom: '40px',

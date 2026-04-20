@@ -78,18 +78,18 @@ export function Home(): React.JSX.Element {
         >
           {/* YUE eyebrow */}
           <div className="flex items-center justify-center mb-5">
-            <span className="font-cinzel uppercase" style={{ fontSize: '11px', letterSpacing: '0.55em', color: 'rgba(212,175,106,0.85)' }}>Yue</span>
+            <span className="font-cinzel uppercase" style={{ fontSize: '12px', letterSpacing: '0.55em', color: 'rgba(212,175,106,0.85)' }}>Yue</span>
           </div>
 
           {/* Company name */}
           <h1
             className="font-cinzel font-semibold uppercase mx-auto"
             style={{
-              fontSize: 'clamp(26px, 4.6vw, 56px)',
+              fontSize: 'clamp(22px, 3.4vw, 38px)',
               letterSpacing: '0.12em',
               lineHeight: 1.15,
               marginBottom: '18px',
-              maxWidth: '840px',
+              maxWidth: 'clamp(360px, 62vw, 620px)',
               color: '#d4af6a',
             }}
           >
@@ -100,7 +100,7 @@ export function Home(): React.JSX.Element {
           <p
             className="font-sans mx-auto"
             style={{
-              fontSize: 'clamp(13px, 1.4vw, 17px)',
+              fontSize: 'clamp(15px, 1.4vw, 17px)',
               color: 'rgba(255,255,255,0.85)',
               letterSpacing: '0.03em',
               lineHeight: 1.75,
@@ -141,7 +141,7 @@ export function Home(): React.JSX.Element {
           <p
             className="font-cinzel uppercase mb-6"
             style={{
-              fontSize: '14px',
+              fontSize: '12px',
               letterSpacing: '0.45em',
               color: 'rgba(212,175,106,0.85)',
             }}

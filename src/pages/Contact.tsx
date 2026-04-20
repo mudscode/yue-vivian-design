@@ -58,7 +58,7 @@ export function Contact(): React.JSX.Element {
         <h1
           className="font-cinzel uppercase"
           style={{
-            fontSize: 'clamp(40px, 6.5vw, 76px)',
+            fontSize: 'clamp(30px, 4.4vw, 48px)',
             letterSpacing: '0.08em',
             color: '#e8c87a',
             marginBottom: '24px',
@@ -169,7 +169,7 @@ export function Contact(): React.JSX.Element {
                 className="font-sans bg-transparent border-0 cursor-pointer"
                 style={{
                   color: '#e8c87a',
-                  fontSize: '17px',
+                  fontSize: '15px',
                   letterSpacing: '0.02em',
                   textDecoration: 'underline',
                   textUnderlineOffset: '4px',
