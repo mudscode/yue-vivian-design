@@ -27,13 +27,14 @@ export function MarketPerspectives(): React.JSX.Element {
             letterSpacing: '0.01em',
           }}
         >
-          <p style={{ marginBottom: '28px' }}>
-            Current insights on international precious metals markets and opportunities for
-            institutional and high-net-worth clients.
+          <p style={{ marginBottom: '24px' }}>
+            We occasionally share general observations on global economic trends and market
+            developments.
           </p>
           <p>
-            Our team monitors global supply chains, regulatory developments in Asia, and
-            macroeconomic events affecting gold and related assets.
+            This section is intended for informational purposes only and does not constitute
+            financial, investment, or professional advice of any kind. All content reflects
+            publicly available information and general commentary.
           </p>
         </div>
       </div>

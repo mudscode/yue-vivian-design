@@ -25,9 +25,9 @@ const cloudSrc: Record<CloudPosition, string> = {
 
 const cloudPositionStyle: Record<CloudPosition, React.CSSProperties> = {
   'top-left': { top: '6%', left: '7%' },
-  'top-right': { top: '6%', right: '7%' },
-  'bottom-left': { bottom: '6%', left: '7%' },
-  'bottom-right': { bottom: '6%', right: '7%' },
+  'top-right': { top: '3%', right: '4%' },
+  'bottom-left': { bottom: '3%', left: '7%' },
+  'bottom-right': { bottom: '2%', right: '7%' },
   'mid-left': { top: '22%', left: '7%' },
   'mid-right': { top: '22%', right: '7%' },
 }
@@ -83,7 +83,7 @@ export function PageFrame({ children, clouds }: PageFrameProps): React.JSX.Eleme
           />
         ))}
 
-        {/* Corner clouds — mid-* positions hide on mobile to avoid overlapping content */}
+        {/* Corner clouds — shrink on mobile so they stay corner-decorative; mid-* hide on mobile */}
         {clouds.map((pos) => {
           const isMid = pos === 'mid-left' || pos === 'mid-right'
           return (
@@ -92,11 +92,8 @@ export function PageFrame({ children, clouds }: PageFrameProps): React.JSX.Eleme
               src={cloudSrc[pos]}
               alt=""
               aria-hidden="true"
-              className={`cloud-gold absolute select-none pointer-events-none ${isMid ? 'hidden md:block' : ''}`}
-              style={{
-                width: 'clamp(78px, 16%, 160px)',
-                ...cloudPositionStyle[pos],
-              }}
+              className={`cloud-gold absolute select-none pointer-events-none w-[clamp(52px,13%,90px)] md:w-[clamp(78px,16%,160px)] ${isMid ? 'hidden md:block' : ''}`}
+              style={cloudPositionStyle[pos]}
             />
           )
         })}

@@ -26,14 +26,18 @@ export function AboutUs(): React.JSX.Element {
             letterSpacing: '0.01em',
           }}
         >
-          <p style={{ marginBottom: '28px' }}>
+          <p style={{ marginBottom: '24px' }}>
             <span style={{ color: '#ffffff', fontWeight: 500 }}>YUE VIVIAN INTERNATIONAL LIMITED</span>{' '}
-            is a Hong Kong registered company with over three decades of combined international
-            business experience in the precious metals sector.
+            is a Hong Kong registered company focused on international business matters.
+          </p>
+          <p style={{ marginBottom: '24px' }}>
+            Backed by over three decades of combined international business experience, we maintain
+            a selective and discreet approach to engagement. We operate from Hong Kong and value
+            long-term relationships built on trust, confidentiality, and professionalism.
           </p>
           <p>
-            We provide discreet advisory services connecting qualified buyers with trusted sellers
-            in global markets.
+            Our focus is on providing high-level perspectives to qualified institutional parties
+            who seek thoughtful dialogue on broader market developments.
           </p>
         </div>
       </div>

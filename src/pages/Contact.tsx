@@ -53,7 +53,7 @@ export function Contact(): React.JSX.Element {
   }
 
   return (
-    <PageFrame clouds={['mid-left', 'bottom-right']}>
+    <PageFrame clouds={['top-right', 'bottom-right']}>
       <div className="flex flex-col items-center text-center">
         <h1
           className="font-cinzel uppercase"
@@ -68,28 +68,21 @@ export function Contact(): React.JSX.Element {
         </h1>
 
         <p
-          className="font-sans"
+          className="font-sans mx-auto"
           style={{
-            color: 'rgba(255,255,255,0.95)',
-            fontSize: '20px',
-            letterSpacing: '0.01em',
-            marginBottom: '14px',
-          }}
-        >
-          Hong Kong
-        </p>
-
-        <p
-          className="font-sans"
-          style={{
-            color: 'rgba(255,255,255,0.82)',
-            fontSize: '15px',
+            color: 'rgba(255,255,255,0.88)',
+            fontSize: 'clamp(15px, 1.4vw, 17px)',
             lineHeight: 1.7,
+            letterSpacing: '0.01em',
+            maxWidth: '460px',
             marginBottom: '40px',
           }}
         >
-          Email: info@yuevivian.com<br />
-          For qualified institutional inquiries only.
+          For qualified parties interested in an initial discussion, please reach out through the
+          form below or via secure email.
+          <br />
+          <br />
+          All inquiries are handled with the strictest confidentiality.
         </p>
 
         {submitted ? (
@@ -127,7 +120,7 @@ export function Contact(): React.JSX.Element {
             </div>
 
             <div style={{ marginBottom: '28px' }}>
-              <label htmlFor="company" style={fieldLabelStyle}>Company</label>
+              <label htmlFor="company" style={fieldLabelStyle}>Company / Institution</label>
               <input
                 id="company"
                 type="text"
@@ -183,11 +176,48 @@ export function Contact(): React.JSX.Element {
                   padding: '8px 4px',
                 }}
               >
-                Get in Touch
+                Send Message
               </button>
             </div>
           </form>
         )}
+
+        {/* Physical address */}
+        <div
+          className="font-sans mx-auto"
+          style={{
+            marginTop: '56px',
+            paddingTop: '32px',
+            borderTop: '1px solid rgba(212,175,106,0.18)',
+            maxWidth: '440px',
+            width: '100%',
+          }}
+        >
+          <p
+            className="font-cinzel uppercase"
+            style={{
+              color: 'rgba(212,175,106,0.85)',
+              fontSize: '12px',
+              letterSpacing: '0.35em',
+              marginBottom: '12px',
+            }}
+          >
+            Physical Address
+          </p>
+          <address
+            className="not-italic"
+            style={{
+              color: 'rgba(255,255,255,0.78)',
+              fontSize: '14px',
+              lineHeight: 1.7,
+            }}
+          >
+            YUE VIVIAN INTERNATIONAL LIMITED<br />
+            Unit 907, Sunwise Industrial Building<br />
+            16-26 Wang Wo Tsai Street, Tsuen Wan<br />
+            New Territories, Hong Kong
+          </address>
+        </div>
       </div>
     </PageFrame>
   )
