@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 interface NavLink {
@@ -47,7 +47,7 @@ export function Nav(): React.JSX.Element {
           className="relative flex items-center justify-between mx-auto"
           style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 620px)' }}
         >
-          {/* Logo — far left on every breakpoint */}
+          {/* Logo */}
           <Link
             to="/"
             onClick={closeDrawer}
@@ -62,24 +62,35 @@ export function Nav(): React.JSX.Element {
             福
           </Link>
 
-          {/* Desktop links — spread so Contact lands at far right */}
-          <ul className="hidden md:flex items-center list-none m-0 p-0 gap-10">
-            {links.map(({ label, to }) => (
-              <li key={to} className="flex items-center">
-                <Link
-                  to={to}
-                  className="tracking-wide transition-colors duration-200 no-underline"
+          {/* Desktop links — each link and separator is its own flex child so justify-between spreads them evenly */}
+          {links.map(({ label, to }, idx) => (
+            <Fragment key={to}>
+              {idx > 0 && (
+                <span
+                  aria-hidden="true"
+                  className="hidden md:inline-block select-none"
                   style={{
+                    color: 'rgba(212,175,106,0.35)',
                     fontSize: '15px',
-                    letterSpacing: '0.03em',
-                    color: pathname === to ? linkActive : linkInactive,
+                    lineHeight: 1,
                   }}
                 >
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  |
+                </span>
+              )}
+              <Link
+                to={to}
+                className="hidden md:inline-block tracking-wide transition-colors duration-200 no-underline"
+                style={{
+                  fontSize: '15px',
+                  letterSpacing: '0.03em',
+                  color: pathname === to ? linkActive : linkInactive,
+                }}
+              >
+                {label}
+              </Link>
+            </Fragment>
+          ))}
 
           {/* Mobile hamburger (far right) */}
           <button
