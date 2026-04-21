@@ -1,5 +1,6 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react'
-import { PageFrame } from '../components/PageFrame'
+import { FrameBorder } from '../components/FrameBorder'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 interface FormState {
   name: string
@@ -32,6 +33,13 @@ const inputStyle: React.CSSProperties = {
 }
 
 export function Contact(): React.JSX.Element {
+  useDocumentMeta({
+    title: 'Contact · Yue Vivian International Limited',
+    description:
+      'For qualified parties interested in an initial discussion, please reach out through the form or via secure email. All inquiries are handled with strict confidentiality.',
+    canonicalPath: '/contact',
+  })
+
   const [form, setForm] = useState<FormState>({ name: '', company: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState<boolean>(false)
 
@@ -53,7 +61,7 @@ export function Contact(): React.JSX.Element {
   }
 
   return (
-    <PageFrame clouds={['top-right', 'bottom-right']}>
+    <FrameBorder>
       <div className="flex flex-col items-center text-center">
         <h1
           className="font-cinzel uppercase"
@@ -74,7 +82,7 @@ export function Contact(): React.JSX.Element {
             fontSize: 'clamp(15px, 1.4vw, 17px)',
             lineHeight: 1.7,
             letterSpacing: '0.01em',
-            maxWidth: '460px',
+            maxWidth: '620px',
             marginBottom: '40px',
           }}
         >
@@ -92,7 +100,7 @@ export function Contact(): React.JSX.Element {
               color: 'rgba(255,255,255,0.82)',
               fontSize: '15px',
               lineHeight: 1.7,
-              maxWidth: '440px',
+              maxWidth: '560px',
             }}
           >
             Thank you. Your message has been received. We will respond to qualified inquiries
@@ -102,7 +110,7 @@ export function Contact(): React.JSX.Element {
           <form
             onSubmit={handleSubmit}
             className="w-full text-left"
-            style={{ maxWidth: '440px' }}
+            style={{ maxWidth: '560px' }}
           >
             <div style={{ marginBottom: '28px' }}>
               <label htmlFor="name" style={fieldLabelStyle}>Full Name</label>
@@ -189,7 +197,7 @@ export function Contact(): React.JSX.Element {
             marginTop: '56px',
             paddingTop: '32px',
             borderTop: '1px solid rgba(212,175,106,0.18)',
-            maxWidth: '440px',
+            maxWidth: '560px',
             width: '100%',
           }}
         >
@@ -219,6 +227,6 @@ export function Contact(): React.JSX.Element {
           </address>
         </div>
       </div>
-    </PageFrame>
+    </FrameBorder>
   )
 }

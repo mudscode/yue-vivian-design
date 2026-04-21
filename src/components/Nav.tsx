@@ -39,13 +39,15 @@ export function Nav(): React.JSX.Element {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 bg-ink transition-[border-color] duration-200 ${
-          scrolled ? 'border-b border-gold/20' : 'border-b border-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 transition-[background-color,border-color] duration-200 ${
+          scrolled
+            ? 'bg-ink border-b border-gold/20'
+            : 'bg-transparent border-b border-transparent'
         }`}
       >
         <div
           className="relative flex items-center justify-between mx-auto"
-          style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 620px)' }}
+          style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 820px)' }}
         >
           {/* Logo */}
           <Link

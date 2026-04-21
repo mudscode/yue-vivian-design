@@ -1,8 +1,16 @@
-import { PageFrame } from '../components/PageFrame'
+import { FrameBorder } from '../components/FrameBorder'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 export function MarketPerspectives(): React.JSX.Element {
+  useDocumentMeta({
+    title: 'Market Perspectives · Yue Vivian International Limited',
+    description:
+      'General observations on global economic trends and market developments, shared for informational purposes.',
+    canonicalPath: '/market-perspectives',
+  })
+
   return (
-    <PageFrame clouds={['top-left', 'top-right', 'bottom-left']}>
+    <FrameBorder>
       <div className="flex flex-col items-center text-center">
         <h1
           className="font-cinzel uppercase"
@@ -20,7 +28,7 @@ export function MarketPerspectives(): React.JSX.Element {
         <div
           className="font-sans mx-auto"
           style={{
-            maxWidth: '460px',
+            maxWidth: '620px',
             color: 'rgba(255,255,255,0.88)',
             fontSize: 'clamp(15px, 1.4vw, 17px)',
             lineHeight: 1.7,
@@ -38,6 +46,6 @@ export function MarketPerspectives(): React.JSX.Element {
           </p>
         </div>
       </div>
-    </PageFrame>
+    </FrameBorder>
   )
 }

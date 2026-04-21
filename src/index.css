@@ -12,19 +12,6 @@
   --font-sans:   system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Cloud tint: dark strokes → warm gold line-art matching reference */
-.cloud-gold {
-  filter:
-    brightness(0)
-    invert(1)
-    sepia(1)
-    saturate(5)
-    hue-rotate(-6deg)
-    brightness(0.78)
-    drop-shadow(0 2px 3px rgba(0,0,0,0.55))
-    drop-shadow(0 0 10px rgba(185,138,50,0.22));
-}
-
 /* CTA — gold-on-transparent, inverts to ink-on-gold on hover */
 .cta-gold {
   color: #d4af6a;

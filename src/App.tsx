@@ -5,7 +5,7 @@ import { Home } from './pages/Home'
 import { AboutUs } from './pages/AboutUs'
 import { MarketPerspectives } from './pages/MarketPerspectives'
 import { Contact } from './pages/Contact'
-import './App.css'
+import { NotFound } from './pages/NotFound'
 
 export function App(): React.JSX.Element {
   return (
@@ -16,6 +16,7 @@ export function App(): React.JSX.Element {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/market-perspectives" element={<MarketPerspectives />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>

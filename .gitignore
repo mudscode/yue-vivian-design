@@ -34,3 +34,7 @@ image.png
 /Screenshot*.jpg
 /Screenshot*.jpeg
 /new-borders.*
+/IMG_*.jpg
+/IMG_*.jpeg
+/IMG_*.png
+/*.mov

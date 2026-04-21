@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yuevivian.com/sitemap.xml

@@ -1,8 +1,16 @@
-import { PageFrame } from '../components/PageFrame'
+import { FrameBorder } from '../components/FrameBorder'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 export function AboutUs(): React.JSX.Element {
+  useDocumentMeta({
+    title: 'About Us · Yue Vivian International Limited',
+    description:
+      'Yue Vivian International Limited is a Hong Kong registered company focused on international business matters, backed by over three decades of combined experience.',
+    canonicalPath: '/about',
+  })
+
   return (
-    <PageFrame clouds={['top-right', 'bottom-left']}>
+    <FrameBorder>
       <div className="flex flex-col items-center text-center">
         <h1
           className="font-cinzel uppercase"
@@ -19,7 +27,7 @@ export function AboutUs(): React.JSX.Element {
         <div
           className="font-sans mx-auto"
           style={{
-            maxWidth: '440px',
+            maxWidth: '620px',
             color: 'rgba(255,255,255,0.88)',
             fontSize: 'clamp(15px, 1.4vw, 17px)',
             lineHeight: 1.7,
@@ -41,6 +49,6 @@ export function AboutUs(): React.JSX.Element {
           </p>
         </div>
       </div>
-    </PageFrame>
+    </FrameBorder>
   )
 }

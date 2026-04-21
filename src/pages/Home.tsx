@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
 export function Home(): React.JSX.Element {
+  useDocumentMeta({
+    title: 'Yue Vivian International Limited',
+    description:
+      'A Hong Kong registered company providing perspectives on international markets, engaging selectively with qualified institutional counterparts.',
+    canonicalPath: '/',
+  })
+
   return (
     <>
       {/* ─────────────── HERO ─────────────── */}
@@ -34,10 +42,10 @@ export function Home(): React.JSX.Element {
         />
 
         {/* ──── Hero intro video — plays once, freezes on last frame ──── */}
-        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-20 lg:pt-[66px] pb-0">
+        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-0 pb-0">
           {/* Mobile — edge-to-edge, taller aspect */}
           <video
-            src="/assets/hero-intro-mobile.mp4"
+            src="/assets/video/hero-mobile.mp4"
             autoPlay
             muted
             playsInline
@@ -45,21 +53,17 @@ export function Home(): React.JSX.Element {
             aria-label="Yue Vivian crest animation"
             className="w-full h-auto block lg:hidden"
           />
-          {/* Desktop — clamped width */}
-          <div
-            className="relative hidden lg:block"
-            style={{ width: 'clamp(360px, 62vw, 620px)' }}
-          >
-            <video
-              src="/assets/hero-intro.mp4"
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              aria-label="Yue Vivian crest animation"
-              className="w-full h-auto block"
-            />
-          </div>
+          {/* Desktop — centered artwork, natural 1.5:1 aspect, black space either side */}
+          <video
+            src="/assets/video/hero-desktop.mp4"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            aria-label="Yue Vivian crest animation"
+            className="hidden lg:block mx-auto w-full h-auto"
+            style={{ maxWidth: 'clamp(720px, 72vw, 1080px)' }}
+          />
         </div>
 
         {/* ──── Text section ──── */}
@@ -89,7 +93,7 @@ export function Home(): React.JSX.Element {
               letterSpacing: '0.12em',
               lineHeight: 1.15,
               marginBottom: '18px',
-              maxWidth: 'clamp(360px, 62vw, 620px)',
+              maxWidth: 'clamp(360px, 62vw, 820px)',
               color: '#d4af6a',
             }}
           >
@@ -135,7 +139,7 @@ export function Home(): React.JSX.Element {
       >
         <div
           className="mx-auto"
-          style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 620px)' }}
+          style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 820px)' }}
         >
           {/* Eyebrow */}
           <p
