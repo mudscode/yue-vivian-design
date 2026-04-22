@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom'
+import type { JSX } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { FrameBorder } from '../components/FrameBorder'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
-export function NotFound(): React.JSX.Element {
+export function NotFound(): JSX.Element {
+  const { pathname } = useLocation()
   useDocumentMeta({
     title: 'Page Not Found · Yue Vivian International Limited',
     description: 'The page you are looking for could not be found.',
-    canonicalPath: '/',
+    canonicalPath: pathname,
+    noindex: true,
   })
 
   return (

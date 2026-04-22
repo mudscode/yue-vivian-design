@@ -1,7 +1,8 @@
+import type { JSX } from 'react'
 import { FrameBorder } from '../components/FrameBorder'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
-export function MarketPerspectives(): React.JSX.Element {
+export function MarketPerspectives(): JSX.Element {
   useDocumentMeta({
     title: 'Market Perspectives · Yue Vivian International Limited',
     description:

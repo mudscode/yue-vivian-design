@@ -4,12 +4,28 @@ interface DocumentMeta {
   title: string
   description: string
   canonicalPath: string
+  noindex?: boolean
 }
 
 const SITE_ORIGIN = 'https://yuevivian.com'
+const ROBOTS_META_ID = 'meta-robots-dynamic'
 
-export function useDocumentMeta({ title, description, canonicalPath }: DocumentMeta): void {
-  useEffect((): void => {
+function setRobotsNoindex(enabled: boolean): void {
+  const existing = document.getElementById(ROBOTS_META_ID)
+  if (enabled) {
+    if (existing) return
+    const el = document.createElement('meta')
+    el.id = ROBOTS_META_ID
+    el.setAttribute('name', 'robots')
+    el.setAttribute('content', 'noindex, nofollow')
+    document.head.appendChild(el)
+  } else if (existing) {
+    existing.remove()
+  }
+}
+
+export function useDocumentMeta({ title, description, canonicalPath, noindex = false }: DocumentMeta): void {
+  useEffect((): (() => void) => {
     document.title = title
 
     const descEl = document.querySelector<HTMLMetaElement>('meta[name="description"]')
@@ -29,9 +45,21 @@ export function useDocumentMeta({ title, description, canonicalPath }: DocumentM
 
     const fullUrl = `${SITE_ORIGIN}${canonicalPath}`
     const canonicalEl = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
-    if (canonicalEl) canonicalEl.setAttribute('href', fullUrl)
+    if (canonicalEl) {
+      if (noindex) {
+        canonicalEl.removeAttribute('href')
+      } else {
+        canonicalEl.setAttribute('href', fullUrl)
+      }
+    }
 
     const ogUrlEl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]')
     if (ogUrlEl) ogUrlEl.setAttribute('content', fullUrl)
-  }, [title, description, canonicalPath])
+
+    setRobotsNoindex(noindex)
+
+    return (): void => {
+      setRobotsNoindex(false)
+    }
+  }, [title, description, canonicalPath, noindex])
 }

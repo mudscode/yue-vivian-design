@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, type JSX } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 interface NavLink {
@@ -18,7 +18,7 @@ const linkActive = '#f5d78e'
 const goldMuted = 'rgba(212,175,106,0.9)'
 const drawerBorder = 'rgba(212,175,106,0.18)'
 
-export function Nav(): React.JSX.Element {
+export function Nav(): JSX.Element {
   const { pathname } = useLocation()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [scrolled, setScrolled] = useState<boolean>(false)

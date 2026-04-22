@@ -1,13 +1,30 @@
+import { useEffect, useState, type JSX } from 'react'
 import { Link } from 'react-router-dom'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
-export function Home(): React.JSX.Element {
+const DESKTOP_QUERY = '(min-width: 1024px)'
+
+export function Home(): JSX.Element {
   useDocumentMeta({
     title: 'Yue Vivian International Limited',
     description:
       'A Hong Kong registered company providing perspectives on international markets, engaging selectively with qualified institutional counterparts.',
     canonicalPath: '/',
   })
+
+  const [isDesktop, setIsDesktop] = useState<boolean>((): boolean => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia(DESKTOP_QUERY).matches
+  })
+
+  useEffect((): (() => void) => {
+    const mq = window.matchMedia(DESKTOP_QUERY)
+    function handleChange(e: MediaQueryListEvent): void {
+      setIsDesktop(e.matches)
+    }
+    mq.addEventListener('change', handleChange)
+    return (): void => mq.removeEventListener('change', handleChange)
+  }, [])
 
   return (
     <>
@@ -43,27 +60,28 @@ export function Home(): React.JSX.Element {
 
         {/* ──── Hero intro video — plays once, freezes on last frame ──── */}
         <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-0 pb-0">
-          {/* Mobile — edge-to-edge, taller aspect */}
-          <video
-            src="/assets/video/hero-mobile.mp4"
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            aria-label="Yue Vivian crest animation"
-            className="w-full h-auto block lg:hidden"
-          />
-          {/* Desktop — centered artwork, natural 1.5:1 aspect, black space either side */}
-          <video
-            src="/assets/video/hero-desktop.mp4"
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            aria-label="Yue Vivian crest animation"
-            className="hidden lg:block mx-auto w-full h-auto"
-            style={{ maxWidth: 'clamp(720px, 72vw, 1080px)' }}
-          />
+          {isDesktop ? (
+            <video
+              src="/assets/video/hero-desktop.mp4"
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              aria-label="Yue Vivian crest animation"
+              className="mx-auto w-full h-auto"
+              style={{ maxWidth: 'clamp(720px, 72vw, 1080px)' }}
+            />
+          ) : (
+            <video
+              src="/assets/video/hero-mobile.mp4"
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              aria-label="Yue Vivian crest animation"
+              className="w-full h-auto block"
+            />
+          )}
         </div>
 
         {/* ──── Text section ──── */}

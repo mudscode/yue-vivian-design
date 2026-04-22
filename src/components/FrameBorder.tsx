@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 interface FrameBorderProps {
   children: ReactNode
@@ -22,7 +22,7 @@ const cornerPositionStyle: Record<CornerKey, React.CSSProperties> = {
 
 const corners: readonly CornerKey[] = ['tl', 'tr', 'bl', 'br']
 
-export function FrameBorder({ children }: FrameBorderProps): React.JSX.Element {
+export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
   return (
     <main className="min-h-svh bg-ink pt-28 pb-20 px-6 md:px-10">
       <div

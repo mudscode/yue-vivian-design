@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
@@ -7,7 +8,7 @@ import { MarketPerspectives } from './pages/MarketPerspectives'
 import { Contact } from './pages/Contact'
 import { NotFound } from './pages/NotFound'
 
-export function App(): React.JSX.Element {
+export function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Nav />

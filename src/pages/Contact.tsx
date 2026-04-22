@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ChangeEvent } from 'react'
+import { useState, type FormEvent, type ChangeEvent, type JSX } from 'react'
 import { FrameBorder } from '../components/FrameBorder'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
@@ -32,7 +32,7 @@ const inputStyle: React.CSSProperties = {
   transition: 'border-color 0.2s ease',
 }
 
-export function Contact(): React.JSX.Element {
+export function Contact(): JSX.Element {
   useDocumentMeta({
     title: 'Contact · Yue Vivian International Limited',
     description:
