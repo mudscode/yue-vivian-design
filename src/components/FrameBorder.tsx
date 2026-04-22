@@ -1,11 +1,11 @@
 import type { CSSProperties, JSX, ReactNode } from 'react'
-import frameReferenceUrl from '../../IMG_3716.jpg'
 
 interface FrameBorderProps {
   children: ReactNode
 }
 
 const frameBorderWidth = 'clamp(28px, 4.8vw, 52px)'
+const frameReferenceUrl = '/assets/frame/frame-reference.jpg'
 
 const frameShellStyle: CSSProperties = {
   width: '100%',
