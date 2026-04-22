@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, type JSX } from 'react'
+import { Fragment, useState, type JSX } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 interface NavLink {
@@ -21,16 +21,6 @@ const drawerBorder = 'rgba(212,175,106,0.18)'
 export function Nav(): JSX.Element {
   const { pathname } = useLocation()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [scrolled, setScrolled] = useState<boolean>(false)
-
-  useEffect((): (() => void) => {
-    function handleScroll(): void {
-      setScrolled(window.scrollY > 4)
-    }
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return (): void => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   function closeDrawer(): void {
     setIsOpen(false)
@@ -39,11 +29,7 @@ export function Nav(): JSX.Element {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 transition-[background-color,border-color] duration-200 ${
-          scrolled
-            ? 'bg-ink border-b border-gold/20'
-            : 'bg-transparent border-b border-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 bg-ink border-b border-gold/20"
       >
         <div
           className="relative flex items-center justify-between mx-auto"

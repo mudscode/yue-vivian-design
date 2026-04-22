@@ -29,7 +29,7 @@ export function MarketPerspectives(): JSX.Element {
         <div
           className="font-sans mx-auto"
           style={{
-            maxWidth: '620px',
+            maxWidth: '700px',
             color: 'rgba(255,255,255,0.88)',
             fontSize: 'clamp(15px, 1.4vw, 17px)',
             lineHeight: 1.7,

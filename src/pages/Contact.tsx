@@ -82,7 +82,7 @@ export function Contact(): JSX.Element {
             fontSize: 'clamp(15px, 1.4vw, 17px)',
             lineHeight: 1.7,
             letterSpacing: '0.01em',
-            maxWidth: '620px',
+            maxWidth: '700px',
             marginBottom: '40px',
           }}
         >
@@ -110,7 +110,7 @@ export function Contact(): JSX.Element {
           <form
             onSubmit={handleSubmit}
             className="w-full text-left"
-            style={{ maxWidth: '560px' }}
+            style={{ maxWidth: '640px' }}
           >
             <div style={{ marginBottom: '28px' }}>
               <label htmlFor="name" style={fieldLabelStyle}>Full Name</label>
@@ -197,7 +197,7 @@ export function Contact(): JSX.Element {
             marginTop: '56px',
             paddingTop: '32px',
             borderTop: '1px solid rgba(212,175,106,0.18)',
-            maxWidth: '560px',
+            maxWidth: '640px',
             width: '100%',
           }}
         >

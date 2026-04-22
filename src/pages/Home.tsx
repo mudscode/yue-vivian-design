@@ -1,8 +1,6 @@
-import { useEffect, useState, type JSX } from 'react'
+import type { JSX } from 'react'
 import { Link } from 'react-router-dom'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-
-const DESKTOP_QUERY = '(min-width: 1024px)'
 
 export function Home(): JSX.Element {
   useDocumentMeta({
@@ -12,20 +10,6 @@ export function Home(): JSX.Element {
     canonicalPath: '/',
   })
 
-  const [isDesktop, setIsDesktop] = useState<boolean>((): boolean => {
-    if (typeof window === 'undefined') return false
-    return window.matchMedia(DESKTOP_QUERY).matches
-  })
-
-  useEffect((): (() => void) => {
-    const mq = window.matchMedia(DESKTOP_QUERY)
-    function handleChange(e: MediaQueryListEvent): void {
-      setIsDesktop(e.matches)
-    }
-    mq.addEventListener('change', handleChange)
-    return (): void => mq.removeEventListener('change', handleChange)
-  }, [])
-
   return (
     <>
       {/* ─────────────── HERO ─────────────── */}
@@ -33,7 +17,6 @@ export function Home(): JSX.Element {
         className="relative min-h-svh flex flex-col lg:justify-center overflow-hidden"
         style={{ background: '#080605', isolation: 'isolate' }}
       >
-
         {/* Subtle warm highlight from upper-right — kept soft so the dark base dominates */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -42,7 +25,7 @@ export function Home(): JSX.Element {
               radial-gradient(ellipse 70% 55% at 92% -8%,
                 rgba(200,150,60,0.18) 0%,
                 rgba(150,110,45,0.08) 30%,
-                transparent 60%)`
+                transparent 60%)`,
           }}
         />
 
@@ -54,13 +37,28 @@ export function Home(): JSX.Element {
               radial-gradient(ellipse 110% 100% at 35% 70%,
                 transparent 35%,
                 rgba(0,0,0,0.45) 75%,
-                rgba(0,0,0,0.75) 100%)`
+                rgba(0,0,0,0.75) 100%)`,
           }}
         />
 
         {/* ──── Hero intro video — plays once, freezes on last frame ──── */}
-        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-0 pb-0">
-          {isDesktop ? (
+        <div className="relative flex-1 lg:flex-none flex items-center justify-center pt-20 lg:pt-[66px] pb-0">
+          {/* Mobile — edge-to-edge, taller aspect */}
+          <video
+            src="/assets/video/hero-mobile.mp4"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            aria-label="Yue Vivian crest animation"
+            className="w-full h-auto block lg:hidden"
+          />
+
+          {/* Desktop — clamped width */}
+          <div
+            className="relative hidden lg:block"
+            style={{ width: 'min(100%, 1120px)' }}
+          >
             <video
               src="/assets/video/hero-desktop.mp4"
               autoPlay
@@ -68,20 +66,9 @@ export function Home(): JSX.Element {
               playsInline
               preload="auto"
               aria-label="Yue Vivian crest animation"
-              className="mx-auto w-full h-auto"
-              style={{ maxWidth: 'clamp(720px, 72vw, 1080px)' }}
-            />
-          ) : (
-            <video
-              src="/assets/video/hero-mobile.mp4"
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              aria-label="Yue Vivian crest animation"
               className="w-full h-auto block"
             />
-          )}
+          </div>
         </div>
 
         {/* ──── Text section ──── */}
@@ -95,15 +82,22 @@ export function Home(): JSX.Element {
               rgba(13,10,7,0.65) 34%,
               rgba(13,10,7,0.88) 48%,
               rgba(13,10,7,0.98) 62%,
-              #0d0a07 78%)`
+              #0d0a07 78%)`,
           }}
         >
-          {/* YUE eyebrow */}
           <div className="flex items-center justify-center mb-5">
-            <span className="font-cinzel uppercase" style={{ fontSize: '12px', letterSpacing: '0.55em', color: 'rgba(212,175,106,0.85)' }}>Yue</span>
+            <span
+              className="font-cinzel uppercase"
+              style={{
+                fontSize: '12px',
+                letterSpacing: '0.55em',
+                color: 'rgba(212,175,106,0.85)',
+              }}
+            >
+              Yue
+            </span>
           </div>
 
-          {/* Company name */}
           <h1
             className="font-cinzel font-semibold uppercase mx-auto"
             style={{
@@ -111,14 +105,15 @@ export function Home(): JSX.Element {
               letterSpacing: '0.12em',
               lineHeight: 1.15,
               marginBottom: '18px',
-              maxWidth: 'clamp(360px, 62vw, 820px)',
+              maxWidth: 'clamp(360px, 62vw, 620px)',
               color: '#d4af6a',
             }}
           >
-            Yue Vivian<br />International Limited
+            Yue Vivian
+            <br />
+            International Limited
           </h1>
 
-          {/* Subtitle */}
           <p
             className="font-sans mx-auto"
             style={{
@@ -130,11 +125,11 @@ export function Home(): JSX.Element {
               marginBottom: '30px',
             }}
           >
-            A Hong Kong registered company providing<br />
+            A Hong Kong registered company providing
+            <br />
             perspectives on international markets.
           </p>
 
-          {/* CTA */}
           <Link
             to="/contact"
             className="cta-gold inline-block font-cinzel uppercase"
@@ -147,7 +142,6 @@ export function Home(): JSX.Element {
             Get in Touch
           </Link>
         </div>
-
       </section>
 
       {/* ─────────────── INTRO BAND ─────────────── */}
@@ -157,9 +151,8 @@ export function Home(): JSX.Element {
       >
         <div
           className="mx-auto"
-          style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 820px)' }}
+          style={{ width: '100%', maxWidth: 'clamp(360px, 62vw, 620px)' }}
         >
-          {/* Eyebrow */}
           <p
             className="font-cinzel uppercase mb-6"
             style={{
@@ -171,17 +164,16 @@ export function Home(): JSX.Element {
             Our Approach
           </p>
 
-          {/* Accent rule */}
           <div
             className="mx-auto mb-8"
             style={{
               width: '48px',
               height: '1px',
-              background: 'linear-gradient(to right, transparent, rgba(212,175,106,0.55), transparent)',
+              background:
+                'linear-gradient(to right, transparent, rgba(212,175,106,0.55), transparent)',
             }}
           />
 
-          {/* Body */}
           <p
             className="font-sans mx-auto"
             style={{
@@ -192,9 +184,9 @@ export function Home(): JSX.Element {
               maxWidth: '640px',
             }}
           >
-            Backed by over three decades of combined international business experience,
-            we engage selectively with qualified institutional counterparts through
-            direct and confidential channels.
+            Backed by over three decades of combined international business experience, we engage
+            selectively with qualified institutional counterparts through direct and confidential
+            channels.
           </p>
         </div>
       </section>
