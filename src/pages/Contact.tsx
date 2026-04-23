@@ -156,7 +156,7 @@ export function Contact(): JSX.Element {
               />
             </div>
 
-            <div style={{ marginBottom: '44px' }}>
+            <div className="mb-6 md:mb-11">
               <label htmlFor="message" style={fieldLabelStyle}>Message</label>
               <textarea
                 id="message"
@@ -192,13 +192,14 @@ export function Contact(): JSX.Element {
 
         {/* Physical address */}
         <div
-          className="font-sans mx-auto"
+          className="font-sans mx-auto w-full mt-8 md:mt-14"
           style={{
-            marginTop: '56px',
             paddingTop: '32px',
-            borderTop: '1px solid rgba(212,175,106,0.18)',
             maxWidth: '640px',
-            width: '100%',
+            backgroundImage: 'linear-gradient(to right, transparent 0%, rgba(212,175,106,0.45) 15%, rgba(212,175,106,0.45) 85%, transparent 100%)',
+            backgroundSize: '100% 1px',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'top',
           }}
         >
           <p

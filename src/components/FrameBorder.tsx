@@ -20,16 +20,21 @@ const corners: readonly CornerKey[] = ['tl', 'tr', 'bl', 'br']
 const FRAME_GOLD = '#c89d53'
 const FRAME_BG = '#0d0a07'
 const CORNER_SIZE = 'clamp(72px, 9vw, 110px)'
-const OUTER_OFFSET = `calc(${CORNER_SIZE} * 0.209)`
-const OUTER_THICK = `calc(${CORNER_SIZE} * 0.036)`
-const INNER_OFFSET = `calc(${CORNER_SIZE} * 0.282)`
+const OUTER_OFFSET = `calc(${CORNER_SIZE} * 0.207)`
+const OUTER_THICK = `calc(${CORNER_SIZE} * 0.032)`
+const INNER_OFFSET = `calc(${CORNER_SIZE} * 0.279)`
 const INNER_THICK = `max(1px, calc(${CORNER_SIZE} * 0.014))`
+const LINE_EXTEND = `calc(${CORNER_SIZE} * 0.03)`
+const LINE_EDGE = `calc(${CORNER_SIZE} - ${LINE_EXTEND})`
+const FADE = `calc(${CORNER_SIZE} * 0.04)`
+const HORIZ_LINE_BG = `linear-gradient(to right, transparent 0, ${FRAME_GOLD} ${FADE}, ${FRAME_GOLD} calc(100% - ${FADE}), transparent 100%)`
+const VERT_LINE_BG = `linear-gradient(to bottom, transparent 0, ${FRAME_GOLD} ${FADE}, ${FRAME_GOLD} calc(100% - ${FADE}), transparent 100%)`
 
 const frameShellStyle: CSSProperties = {
   width: '100%',
   maxWidth: '1120px',
   minHeight: '520px',
-  padding: `calc(${INNER_OFFSET} + clamp(12px, 2.4vw, 26px)) calc(${INNER_OFFSET} + clamp(6px, 1.4vw, 16px))`,
+  padding: `calc(${INNER_OFFSET} + clamp(22px, 3.4vw, 40px)) calc(${INNER_OFFSET} + clamp(18px, 2.6vw, 32px))`,
   boxSizing: 'border-box',
   backgroundColor: FRAME_BG,
 }
@@ -42,10 +47,10 @@ export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
           className="absolute pointer-events-none"
           style={{
             top: OUTER_OFFSET,
-            left: CORNER_SIZE,
-            right: CORNER_SIZE,
+            left: LINE_EDGE,
+            right: LINE_EDGE,
             height: OUTER_THICK,
-            background: FRAME_GOLD,
+            background: HORIZ_LINE_BG,
             zIndex: 1,
           }}
         />
@@ -54,10 +59,10 @@ export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
           className="absolute pointer-events-none"
           style={{
             bottom: OUTER_OFFSET,
-            left: CORNER_SIZE,
-            right: CORNER_SIZE,
+            left: LINE_EDGE,
+            right: LINE_EDGE,
             height: OUTER_THICK,
-            background: FRAME_GOLD,
+            background: HORIZ_LINE_BG,
             zIndex: 1,
           }}
         />
@@ -65,11 +70,11 @@ export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
         <div
           className="absolute pointer-events-none"
           style={{
-            top: CORNER_SIZE,
-            bottom: CORNER_SIZE,
+            top: LINE_EDGE,
+            bottom: LINE_EDGE,
             left: OUTER_OFFSET,
             width: OUTER_THICK,
-            background: FRAME_GOLD,
+            background: VERT_LINE_BG,
             zIndex: 1,
           }}
         />
@@ -77,11 +82,11 @@ export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
         <div
           className="absolute pointer-events-none"
           style={{
-            top: CORNER_SIZE,
-            bottom: CORNER_SIZE,
+            top: LINE_EDGE,
+            bottom: LINE_EDGE,
             right: OUTER_OFFSET,
             width: OUTER_THICK,
-            background: FRAME_GOLD,
+            background: VERT_LINE_BG,
             zIndex: 1,
           }}
         />
@@ -90,10 +95,10 @@ export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
           className="absolute pointer-events-none"
           style={{
             top: INNER_OFFSET,
-            left: CORNER_SIZE,
-            right: CORNER_SIZE,
+            left: LINE_EDGE,
+            right: LINE_EDGE,
             height: INNER_THICK,
-            background: FRAME_GOLD,
+            background: HORIZ_LINE_BG,
             zIndex: 1,
           }}
         />
@@ -102,10 +107,10 @@ export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
           className="absolute pointer-events-none"
           style={{
             bottom: INNER_OFFSET,
-            left: CORNER_SIZE,
-            right: CORNER_SIZE,
+            left: LINE_EDGE,
+            right: LINE_EDGE,
             height: INNER_THICK,
-            background: FRAME_GOLD,
+            background: HORIZ_LINE_BG,
             zIndex: 1,
           }}
         />
@@ -113,11 +118,11 @@ export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
         <div
           className="absolute pointer-events-none"
           style={{
-            top: CORNER_SIZE,
-            bottom: CORNER_SIZE,
+            top: LINE_EDGE,
+            bottom: LINE_EDGE,
             left: INNER_OFFSET,
             width: INNER_THICK,
-            background: FRAME_GOLD,
+            background: VERT_LINE_BG,
             zIndex: 1,
           }}
         />
@@ -125,26 +130,30 @@ export function FrameBorder({ children }: FrameBorderProps): JSX.Element {
         <div
           className="absolute pointer-events-none"
           style={{
-            top: CORNER_SIZE,
-            bottom: CORNER_SIZE,
+            top: LINE_EDGE,
+            bottom: LINE_EDGE,
             right: INNER_OFFSET,
             width: INNER_THICK,
-            background: FRAME_GOLD,
+            background: VERT_LINE_BG,
             zIndex: 1,
           }}
         />
 
         {corners.map((pos) => (
-          <img
+          <div
             key={pos}
-            src={CORNER_SRC}
-            alt=""
             aria-hidden="true"
-            draggable={false}
-            className="absolute select-none pointer-events-none z-20"
+            className="absolute pointer-events-none z-20"
             style={{
               width: CORNER_SIZE,
               height: CORNER_SIZE,
+              backgroundColor: FRAME_GOLD,
+              WebkitMaskImage: `url(${CORNER_SRC})`,
+              maskImage: `url(${CORNER_SRC})`,
+              WebkitMaskRepeat: 'no-repeat',
+              maskRepeat: 'no-repeat',
+              WebkitMaskSize: '100% 100%',
+              maskSize: '100% 100%',
               ...cornerStyle[pos],
             }}
           />
