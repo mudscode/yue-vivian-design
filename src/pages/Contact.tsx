@@ -1,4 +1,5 @@
-import { useState, type FormEvent, type ChangeEvent, type JSX } from 'react'
+import { useEffect, useState, type ChangeEvent, type JSX } from 'react'
+import { useForm, ValidationError } from '@formspree/react'
 import { FrameBorder } from '../components/FrameBorder'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
@@ -18,6 +19,12 @@ const fieldLabelStyle: React.CSSProperties = {
   letterSpacing: '0.01em',
   display: 'block',
   marginBottom: '4px',
+}
+
+const errorStyle: React.CSSProperties = {
+  color: 'rgba(232, 120, 120, 0.9)',
+  fontSize: '13px',
+  marginTop: '6px',
 }
 
 const inputStyle: React.CSSProperties = {
@@ -41,7 +48,7 @@ export function Contact(): JSX.Element {
   })
 
   const [form, setForm] = useState<FormState>({ name: '', company: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState<boolean>(false)
+  const [state, handleSubmit] = useForm(import.meta.env.VITE_FORMSPREE_ID as string)
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -55,10 +62,11 @@ export function Contact(): JSX.Element {
     e.target.style.borderBottomColor = goldLine
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>): void {
-    e.preventDefault()
-    setSubmitted(true)
-  }
+  useEffect(() => {
+    if (state.succeeded) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [state.succeeded])
 
   return (
     <FrameBorder>
@@ -75,25 +83,7 @@ export function Contact(): JSX.Element {
           Contact
         </h1>
 
-        <p
-          className="font-sans mx-auto"
-          style={{
-            color: 'rgba(255,255,255,0.88)',
-            fontSize: 'clamp(15px, 1.4vw, 17px)',
-            lineHeight: 1.7,
-            letterSpacing: '0.01em',
-            maxWidth: '700px',
-            marginBottom: '40px',
-          }}
-        >
-          For qualified parties interested in an initial discussion, please reach out through the
-          form below or via secure email.
-          <br />
-          <br />
-          All inquiries are handled with the strictest confidentiality.
-        </p>
-
-        {submitted ? (
+        {state.succeeded ? (
           <p
             className="font-sans"
             style={{
@@ -107,11 +97,29 @@ export function Contact(): JSX.Element {
             promptly and privately.
           </p>
         ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="w-full text-left"
-            style={{ maxWidth: '640px' }}
-          >
+          <>
+            <p
+              className="font-sans mx-auto"
+              style={{
+                color: 'rgba(255,255,255,0.88)',
+                fontSize: 'clamp(15px, 1.4vw, 17px)',
+                lineHeight: 1.7,
+                letterSpacing: '0.01em',
+                maxWidth: '700px',
+                marginBottom: '40px',
+              }}
+            >
+              For qualified parties interested in an initial discussion, please reach out through the
+              form below or via secure email.
+              <br />
+              <br />
+              All inquiries are handled with the strictest confidentiality.
+            </p>
+            <form
+              onSubmit={handleSubmit}
+              className="w-full text-left"
+              style={{ maxWidth: '640px' }}
+            >
             <div style={{ marginBottom: '28px' }}>
               <label htmlFor="name" style={fieldLabelStyle}>Full Name</label>
               <input
@@ -154,6 +162,7 @@ export function Contact(): JSX.Element {
                 required
                 style={inputStyle}
               />
+              <ValidationError field="email" errors={state.errors} style={errorStyle} />
             </div>
 
             <div className="mb-6 md:mb-11">
@@ -169,11 +178,13 @@ export function Contact(): JSX.Element {
                 rows={4}
                 style={{ ...inputStyle, resize: 'none' }}
               />
+              <ValidationError field="message" errors={state.errors} style={errorStyle} />
             </div>
 
             <div className="text-center">
               <button
                 type="submit"
+                disabled={state.submitting}
                 className="font-sans bg-transparent border-0 cursor-pointer"
                 style={{
                   color: '#e8c87a',
@@ -182,12 +193,16 @@ export function Contact(): JSX.Element {
                   textDecoration: 'underline',
                   textUnderlineOffset: '4px',
                   padding: '8px 4px',
+                  opacity: state.submitting ? 0.6 : 1,
+                  cursor: state.submitting ? 'not-allowed' : 'pointer',
                 }}
               >
-                Send Message
+                {state.submitting ? 'Sending…' : 'Send Message'}
               </button>
+              <ValidationError errors={state.errors} style={{ ...errorStyle, marginTop: '12px' }} />
             </div>
-          </form>
+            </form>
+          </>
         )}
 
         {/* Physical address */}
