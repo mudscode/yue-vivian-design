@@ -14,7 +14,7 @@ export function Home(): JSX.Element {
     <>
       {/* ─────────────── HERO ─────────────── */}
       <section
-        className="relative min-h-svh flex flex-col lg:justify-center overflow-hidden"
+        className="relative min-h-svh lg:min-h-0 flex flex-col lg:justify-center overflow-hidden"
         style={{ background: '#080605', isolation: 'isolate' }}
       >
         {/* Subtle warm highlight from upper-right — kept soft so the dark base dominates */}
