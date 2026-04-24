@@ -185,14 +185,11 @@ export function Contact(): JSX.Element {
               <button
                 type="submit"
                 disabled={state.submitting}
-                className="font-sans bg-transparent border-0 cursor-pointer"
+                className="cta-gold inline-block font-cinzel uppercase"
                 style={{
-                  color: '#e8c87a',
-                  fontSize: '15px',
-                  letterSpacing: '0.02em',
-                  textDecoration: 'underline',
-                  textUnderlineOffset: '4px',
-                  padding: '8px 4px',
+                  fontSize: 'clamp(11px, 1vw, 13px)',
+                  letterSpacing: '0.22em',
+                  padding: '13px 44px',
                   opacity: state.submitting ? 0.6 : 1,
                   cursor: state.submitting ? 'not-allowed' : 'pointer',
                 }}
