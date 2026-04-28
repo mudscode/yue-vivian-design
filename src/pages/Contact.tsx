@@ -110,7 +110,14 @@ export function Contact(): JSX.Element {
               }}
             >
               For qualified parties interested in an initial discussion, please reach out through the
-              form below or via secure email.
+              form below or via secure email at{' '}
+              <a
+                href="mailto:info@yuevivian.com"
+                style={{ color: '#e8c87a', textDecoration: 'none', borderBottom: `1px solid ${goldLine}` }}
+              >
+                info@yuevivian.com
+              </a>
+              .
               <br />
               <br />
               All inquiries are handled with the strictest confidentiality.
